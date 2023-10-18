@@ -17,7 +17,8 @@ paths:
           description: "La respuesta es un objeto portatil"
           schema:
             $ref: "#/definitions/Portatil"
-
+        400:
+          description: "Error al delvolver el objeto portatil"
 definitions:
   Portatil:
     type: object
