@@ -1,1 +1,37 @@
 #Autor Adrian Verdejo
+swagger: '2.0'
+host: iesandujar.es
+basePath: /drupal
+info:
+  version: 1.0.0
+  title: IES Jandula Website
+  description: Multiple path
+  contact:
+    name: Adrian Verdejo Garcia
+    email: avergar@g.educaand.es
+    url: https://www.linkedin.com/in/adrianverdejogarcia/
+schemes:
+ - http
+ - https
+paths:
+  /carrito:
+    get:
+      operationId: getCarrito
+      description: Obtener el objeto carrito
+      responses:
+        200:
+          description: Todo a salido correctamente
+          schema:
+            $ref: '#/definitions/Carrito'
+        400:
+          description: Error
+definitions:
+   Carrito:
+    type: object
+    properties: 
+      identifier:
+        type: integer
+        description: Identificador del carrito
+      ordenadores:
+        type: array
+        description: Array de ordenadores
