@@ -1,5 +1,4 @@
 #Autor Adrian Verdejo
-#TODO Hacer un delete el cual elimines una app del array de apps de un portatil determinado
 swagger: '2.0'
 host: reaktor
 basePath: /reaktor
@@ -8,12 +7,35 @@ schemes:
 info: 
   version: 1.0.0
   title: Admin especification file 6
-  description: Send a screenshot file
+  description: Uninstall App
   contact:
     name:  Adrian Verdejo 
     email: avergar952@g.educaand.es
-#TODO Crear el path /admin/uninstallApp/{numeroPortatil} con los requisitos mencionados
-
+paths:
+  /admin/uninstallApp/{numeroPortatil}:
+    delete:
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+        - name: nombreApp
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/App'
+      responses:
+        200:
+          description: Borrado con exito
+        404:
+          description: No se a podido eliminar la app
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: error de servidor
+          schema:
+            $ref: '#/definitions/AdminException'
 
 #OBJETOS
 definitions:
