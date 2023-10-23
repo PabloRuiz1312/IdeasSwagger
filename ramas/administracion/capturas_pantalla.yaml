@@ -1,5 +1,6 @@
 #Autor Eduardo Moreno
-swagger: 2.0
+#TODO Enviar ficheros simulando que son capturas mediante post, no hace falta el uso de objetos
+swagger: '2.0'
 host: reaktor
 basePath: /reaktor
 schemes:
@@ -11,3 +12,4 @@ info:
   contact:
     name:  Eduardo Moreno, Adrian Verdejo
     email: emoralg196@g.educaand.es
+#TODO Establecer el path /admin/uploadScreenshot con los requisitos mencionados
