@@ -27,6 +27,15 @@ paths:
           description: PC turn off successfully
           schema: 
             $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying set off the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
+
       produces:
         - application/json
   
