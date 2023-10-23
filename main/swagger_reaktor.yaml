@@ -27,6 +27,15 @@ paths:
           description: PC turn off successfully
           schema: 
             $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying set off the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
+
       produces:
         - application/json
   
@@ -45,8 +54,46 @@ paths:
           description: PC turn off successfully
           schema: 
             $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying reboot the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
       produces:
         - application/json
+        
+  /admin/executeApp/{numeroPortatil}/{appName}:
+    get:
+      operationId: executeApp
+      description: Execute a app of a specific pc using his number
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          description: Sticker number of the pc
+          in: path
+          required:  true
+        - name: appName
+          type: string
+          description: Name of the app to execute
+          in: path
+          required:  true
+      responses:
+        200:
+          description: App executed successfully
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: Fail to execute, PC number or app name are wrong
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
 
 definitions:
   Portatil:
@@ -106,6 +153,16 @@ definitions:
         type: integer
         format: int32
       brand: 
+        type: string
+  AdminException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
         type: string
       
 
