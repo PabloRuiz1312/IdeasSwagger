@@ -1,1 +1,29 @@
-#Autor Eduargo Moreno Algaba tu objeto posee numero de aula y el identificador del profesor como atributos
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Objeto Aula
+paths:
+  /aulas:
+    post:
+      summary: Crea una nueva aula
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Aula'
+      responses:
+        '201':
+          description: Aula creada exitosamente
+        '400':
+          description: Solicitud no válida
+definitions:
+  Aula:
+    type: object
+    properties:
+      numero_de_aula:
+        type: integer
+        description: Número de aula
+      id_profesor:
+        type: integer
+        description: Identificador del profesor asignado
