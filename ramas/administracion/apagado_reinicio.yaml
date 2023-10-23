@@ -45,6 +45,14 @@ paths:
           description: PC turn off successfully
           schema: 
             $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying reboot the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
       produces:
         - application/json
 
@@ -107,4 +115,14 @@ definitions:
         type: integer
         format: int32
       brand: 
+        type: string
+  AdminException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
         type: string
