@@ -1,0 +1,118 @@
+#Autor Pablo Ruiz Canovas 
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info: 
+  version: 1.0.0
+  title: Admin especification file 2
+  description: Remote code execution 
+  contact:
+    name: Pablo Ruiz Canovas
+    email: pruican1312@g.educaand.es
+paths:
+  /admin/executeApp/{numeroPortatil}/{appName}:
+    get:
+      operationId: executeApp
+      description: Execute a app of a specific pc using his number
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          description: Sticker number of the pc
+          in: path
+          required:  true
+        - name: appName
+          type: string
+          description: Name of the app to execute
+          in: path
+          required:  true
+      responses:
+        200:
+          description: App executed successfully
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: Fail to execute, PC number or app name are wrong
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+
+definitions:
+  Portatil:
+    type: object
+    properties: 
+      numeroJuntaAndalucia:
+        type: integer
+        format: int32
+        description: "Numero de la junta de andalucia"
+      numeroPlacaBase:
+        type: integer
+        format: int32
+        description: "Numero de la placa base del portatil"
+      numeroPortatil:
+        type: integer
+        format: int32
+        description: "Pegatina que posee el portatil"
+      status:
+        type: boolean
+        description: true if the pc is on, false if the pc is off
+        default: true
+      reboot: 
+        type: boolean
+        default: false
+        description: set the pc of if this value is true
+      Hardware:
+        $ref: '#definitions/Hardware'
+  Hardware:
+    type: object
+    properties: 
+        CPU:
+          $ref: '#/definitions/CPU'
+        RAM:
+          $ref: '#/definitions/RAM'
+        HardDisk:
+          $ref: '#/definitions/HardDisk'
+  CPU:
+    properties:
+      number:
+        type: integer
+        format: int32
+      brand:
+        type: string
+  RAM:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  HardDisk:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      currentSize: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  AdminException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
+
+        
+
+
+        
