@@ -12,7 +12,7 @@ info:
   contact:
     name:  Eduardo Moreno, Adrian Verdejo
     email: emoralg196@g.educaand.es
-#TODO Establecer el path con los requisitos mencionados
+#TODO Establecer el path /admin/lockPC/{lock} con los requisitos mencionados
 
 
 
