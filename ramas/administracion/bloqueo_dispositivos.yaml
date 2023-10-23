@@ -1,5 +1,5 @@
 #Autor Eduardo Moreno
-#TODO Crear un getter que pida como parametro en el path "lock" que devuelva un application/json referenciando al objeto portatil
+#TODO Crear un put que pida como parametro en el path "lock" que devuelva un application/json referenciando al objeto portatil
 swagger: '2.0'
 host: reaktor
 basePath: /reaktor
