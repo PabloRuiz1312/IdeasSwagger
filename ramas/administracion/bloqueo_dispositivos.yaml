@@ -7,10 +7,10 @@ schemes:
   - https
 info: 
   version: 1.0.0
-  title: Admin especification file 4
+  title: Admin especification file 3
   description: Send a screenshot file
   contact:
-    name:  Eduardo Moreno, Adrian Verdejo
+    name:  Eduardo Moreno
     email: emoralg196@g.educaand.es
 #TODO Establecer el path /admin/lockPC/{lock} con los requisitos mencionados
 
