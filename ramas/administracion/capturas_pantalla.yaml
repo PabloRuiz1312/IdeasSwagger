@@ -1,0 +1,13 @@
+#Autor Eduardo Moreno
+swagger: 2.0
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info: 
+  version: 1.0.0
+  title: Admin especification file 4
+  description: Send a screenshot file
+  contact:
+    name:  Eduardo Moreno, Adrian Verdejo
+    email: emoralg196@g.educaand.es
