@@ -88,7 +88,7 @@ definitions:
   App:
     type: object
     properties: 
-      appType:
+      nameApp:
         type: string
       isMalware:
         type: boolean
