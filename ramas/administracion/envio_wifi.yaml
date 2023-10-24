@@ -1,0 +1,15 @@
+#Autor Pablo Ruiz Canovas
+swagger: '2.0'
+schemes:
+  - "https"
+info:
+  title: Envio WiFi file 8
+  version: 1.0.0
+  contact:
+     name: "Pablo Ruiz Canovas"
+     email: "pruican1312@g.educaand.es"
+
+
+
+
+  
