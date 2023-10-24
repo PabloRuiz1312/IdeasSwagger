@@ -4,7 +4,7 @@ swagger: '2.0'
 schemes:
   - "https"
 info:
-  title: Envio WiFi file 9
+  title: Actualizacion de PC pro junta de andalucia file 9
   version: 1.0.0
   contact:
      name: "Adrian Verdejo"
