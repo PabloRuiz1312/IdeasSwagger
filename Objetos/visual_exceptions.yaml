@@ -1,0 +1,33 @@
+#Autor Pablo Ruiz Canovas
+swagger: '2.0'
+info:
+  title: "Admin Execptions"
+  description: "Documentation of error 404 or 500 of admins options"
+  version: 1.0.0
+  contact:
+    name: Pablo Ruiz Canovas
+    email: pruican1312@g.educaand.es
+schemes:
+  - "https"
+paths:
+  /exception:
+    get:
+      operationId: getException
+      description: Get a exception object
+      responses:
+        200:
+          description: "Exception getted successfully"
+          schema:
+            $ref: "#definitions/AdminException"
+
+definitions:
+  VisualException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
