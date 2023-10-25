@@ -1,6 +1,8 @@
 #Autor Eduardo Moreno
 #TODO Realizar varios getters usando los identificadores de portatil, profesor y aula
 swagger: '2.0'
+host: reaktor
+basePath: /reaktor
 schemes:
   - "https"
 info:
