@@ -1,6 +1,8 @@
 #Autor Eduardo Moreno
 #TODO Realizar un getter que develva un portatil usando su numero de la junta de andalucia
 swagger: '2.0'
+host: reaktor
+basePath: /reaktor
 schemes:
   - "https"
 info:
