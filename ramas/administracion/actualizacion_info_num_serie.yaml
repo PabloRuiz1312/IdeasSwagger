@@ -1,5 +1,4 @@
 #Autor Adrian Verdejo
-#TODO Realizar un put en el que se actualiza un portatil usando el numero de la placa base como parametro
 swagger: '2.0'
 host: reaktor
 basePath: /reaktor
@@ -12,8 +11,29 @@ info:
      name: "Adrian Verdejo"
      email: "avergar952@g.educaand.es"
 #TODO El path que tienes que usar es /admin/updatePC/{numeroPlacaBase}
-
-
+paths:
+  /admin/updatePC/{numeroPlacaBase}:
+    put:
+      operationId: actualizarPortatil
+      description: actualizar portatil a traves de su numero de placa base
+      parameters:
+        - name: numeroPlacaBase
+          in: body
+          description: Instancia de numero de la placa base
+          required: true
+          schema:
+            $ref: "#/definitions/Portatil"
+      responses:
+        200:
+          description: Ordenador actualizado con exito
+        404:
+          description: No se a podido actualizar debido a un error
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: Error del servidor
+          schema:
+            $ref: '#/definitions/AdminException'
 #OBJETOS
 definitions:
   Portatil:

@@ -12,7 +12,29 @@ info:
      name: "Adrian Verdejo"
      email: "avergar952@g.educaand.es"
 #TODO El path que tienes que usar es /admin/updatePC/{numeroJuntaAndalucia}
-
+paths:
+  /admin/updatePC/{numeroJuntaAndalucia}:
+    put:
+      operationId: actualizarPortatil
+      description: actualizar portatil a traves de su numero de junta de andalucia
+      parameters:
+        - name: numeroJuntaAndalucia
+          in: body
+          description: Instancia de numero de la junta de andalucia
+          required: true
+          schema:
+            $ref: "#/definitions/Portatil"
+      responses:
+        200:
+          description: Ordenador actualizado con exito
+        404:
+          description: No se a podido actualizar debido a un error
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: Error del servidor
+          schema:
+            $ref: '#/definitions/AdminException'
 
 #OBJETOS
 definitions:
