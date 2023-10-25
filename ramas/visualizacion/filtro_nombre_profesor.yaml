@@ -10,6 +10,31 @@ info:
   contact:
      name: "Adrian Verdejo"
      email: "avergar952@g.educaand.es"
+paths:
+  /visual/getProfesor/{id}:
+    get:
+      operationId: idProfesor
+      description: obtener profesor por su id
+      parameters:
+        - name: id
+          in: path
+          description: id de profesor a buscar
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Profesor buscado con exito
+          schema:
+            $ref: '#/definitions/Profesor'
+        404:
+          description: Error al buscar al profesor
+          schema:
+            $ref: '#/definitions/VisualException'
+        500:
+          description: Error de servidor
+          schema:
+            $ref: '#/definitions/VisualException'
 
 
 #OBJETOS

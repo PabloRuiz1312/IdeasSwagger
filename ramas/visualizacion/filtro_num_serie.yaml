@@ -10,7 +10,29 @@ info:
   contact:
      name: "Adrian Verdejo"
      email: "avergar952@g.educaand.es"
-
+paths:
+  /visual/getPortatil/{numeroPlacaBase}:
+    get:
+      operationId: numeroPlacaBase
+      description: obtener el portatil por su placa base
+      parameters:
+        - name: numeroPlacaBase
+          in: path
+          description: numero de placa base a obtener
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Ordenador buscado con exito
+        404:
+          description: Error al buscar el ordenador
+          schema:
+            $ref: '#/definitions/VisualException'
+        500:
+          description: Error de servidor
+          schema:
+            $ref: '#/definitions/VisualException'
 
 
 #OBJETOS
