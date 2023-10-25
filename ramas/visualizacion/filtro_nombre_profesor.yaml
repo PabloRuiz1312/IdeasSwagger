@@ -1,0 +1,35 @@
+#Autor Adrian Verdejo
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - "https"
+info:
+  title: Obtencion de un profesor file 4
+  version: 1.0.0
+  contact:
+     name: "Adrian Verdejo"
+     email: "avergar952@g.educaand.es"
+
+
+#OBJETOS
+definitions:
+  Profesor:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      nombre:
+        type: string
+
+  VisualException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
