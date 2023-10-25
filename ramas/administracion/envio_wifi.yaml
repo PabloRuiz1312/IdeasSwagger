@@ -1,13 +1,129 @@
 #Autor Pablo Ruiz Canovas
 swagger: '2.0'
+host: reaktor
+basePath: /reaktor
 schemes:
-  - "https"
+  - https
 info:
   title: Envio WiFi file 8
+  description: Send WiFi connection to profesores, aulas, carritos
   version: 1.0.0
   contact:
-     name: "Pablo Ruiz Canovas"
-     email: "pruican1312@g.educaand.es"
+    name: Pablo Ruiz Canovas
+    email: pruican1312@g.educaand.es
+paths:
+  /admin/sendWifi/{numero_de_aula}:
+    post:
+      operationId: sendWifiAula
+      description: Send a wifi to a aula
+      consumes:
+        - application/json
+      parameters:
+        - name: numero_de_aula
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/sendWifi/{identifier}:
+    post:
+      operationId: sendWifiCarrito
+      description: Send a wifi to a carrito
+      consumes:
+        - application/json
+      parameters:
+        - name: identifier
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+
+  /admin/sendWifi/{id}:
+    post:
+      operationId: sendWifiProfesor
+      description: Send a wifi to a profesor
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+
+
+
+definitions:
+  Aula:
+    type: object
+    properties:
+      numero_de_aula:
+        type: integer
+        description: Número de aula
+      id_profesor:
+        type: integer
+        description: Identificador del profesor asignado
+  Profesor:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      nombre:
+        type: string
+  Carrito:
+    type: object
+    properties: 
+      identifier:
+        type: integer
+        description: Identificador del carrito
+      ordenadores:
+        type: array
+        description: Array de ordenadores
+  AdminException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
+
+
 
 
 
