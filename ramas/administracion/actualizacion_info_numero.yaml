@@ -1,6 +1,8 @@
 #Autor Adrian Verdejo
 #TODO Realizar un put en el que se actualiza un portatil usando el numero del portatil base como parametro
 swagger: '2.0'
+host: reaktor
+basePath: /reaktor
 schemes:
   - "https"
 info:
