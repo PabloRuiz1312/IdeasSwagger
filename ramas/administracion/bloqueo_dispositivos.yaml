@@ -13,9 +13,29 @@ info:
     name:  Eduardo Moreno
     email: emoralg196@g.educaand.es
 #TODO Establecer el path /admin/lockPC/{lock} con los requisitos mencionados
-
-
-
+paths:
+  /admin/portatiles/{lock}:
+    put:
+      summary: Actualizar un portátil por su identificador de bloqueo
+      parameters:
+        - name: lock
+          in: path
+          description: Identificador de bloqueo del portátil
+          required: true
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Operación exitosa
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: Portátil no encontrado
+        500:
+          description: Error interno del servidor
 #OBJETOS
 definitions:
   Portatil:
