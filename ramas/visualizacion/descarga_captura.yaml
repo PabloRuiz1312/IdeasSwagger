@@ -6,7 +6,7 @@ basePath: /reaktor
 schemes:
   - "https"
 info:
-  title: Filtro por pc, profesor y aula file 9
+  title: Descarga de capturas file 9
   version: 1.0.0
   contact:
      name: "Eduardo Moreno"
@@ -14,7 +14,7 @@ info:
 #TODO El path que tienes que usar es /visual/downloadScreenshot
 
 
-#Objeto para los errores 404 y 500
+#Objeto para los errores 404 y
 definitions:
   VisualException:
     type: object
