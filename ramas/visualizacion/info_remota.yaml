@@ -14,7 +14,122 @@ info:
     name: Pablo Ruiz Canovas
     email: pruican1312@g.educaand.es
 #TODO Usar los paths /visual/getLastReboot, /visual/getLastExe, /visual/getLastLink, /visual/getLastInstall, /visual/getLastUninstall
-
+paths:
+  /visual/getLastReboot/{numeroPortatil}:
+    get:
+      operationId: getLastReboot
+      description: Se obtiene el ultimo reinicio de un portatil usando su pegatina
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Ultimo reinicio obtenido satisfactoriamente
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        404:
+          description: Error al introducir parametros
+          schema:
+            $ref: "#/definitions/VisualException"
+        500:
+          description: Error interno de servidor
+          schema:
+            $ref: "#/definitions/VisualException"
+  /visual/getLastExe/{numeroPortatil}:
+    get:
+      operationId: getLastReboot
+      description: Se obtiene el ultimo programa ejecutado de un portatil usando su pegatina
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Ultimo reinicio obtenido satisfactoriamente
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        404:
+          description: Error al introducir parametros
+          schema:
+            $ref: "#/definitions/VisualException"
+        500:
+          description: Error interno de servidor
+          schema:
+            $ref: "#/definitions/VisualException"
+  /visual/getLastLink/{numeroPortatil}:
+    get:
+      operationId: getLastReboot
+      description: Se obtiene el ultimo enlace de un portatil usando su pegatina
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Ultimo reinicio obtenido satisfactoriamente
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        404:
+          description: Error al introducir parametros
+          schema:
+            $ref: "#/definitions/VisualException"
+        500:
+          description: Error interno de servidor
+          schema:
+            $ref: "#/definitions/VisualException"
+  /visual/getLastInstall/{numeroPortatil}:
+    get:
+      operationId: getLastReboot
+      description: Se obtiene la ultima instalacion de un portatil usando su pegatina
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Ultimo reinicio obtenido satisfactoriamente
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        404:
+          description: Error al introducir parametros
+          schema:
+            $ref: "#/definitions/VisualException"
+        500:
+          description: Error interno de servidor
+          schema:
+            $ref: "#/definitions/VisualException"
+  /visual/getLastUninstall/{numeroPortatil}:
+    get:
+      operationId: getLastReboot
+      description: Se obtiene la ultima desinstalacion de un portatil usando su pegatina
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Ultimo reinicio obtenido satisfactoriamente
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        404:
+          description: Error al introducir parametros
+          schema:
+            $ref: "#/definitions/VisualException"
+        500:
+          description: Error interno de servidor
+          schema:
+            $ref: "#/definitions/VisualException"
 #OBJETOS
 definitions:
   Portatil:
