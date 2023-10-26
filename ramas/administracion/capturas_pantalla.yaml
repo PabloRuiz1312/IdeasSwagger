@@ -13,3 +13,23 @@ info:
     name:  Eduardo Moreno, Adrian Verdejo
     email: emoralg196@g.educaand.es
 #TODO Establecer el path /admin/uploadScreenshot con los requisitos mencionados
+paths:
+  /admin/uploadScreenshot:
+    post:
+      summary: Cargar captura de pantalla
+      description: Enviar una captura de pantalla simulada.
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: screenshot
+          in: formData
+          description: Archivo de captura de pantalla
+          required: true
+          type: file
+      responses:
+        200:
+          description: Archivo cargado con éxito
+        400:
+          description: Solicitud incorrecta
+        500:
+          description: Error del servidor
