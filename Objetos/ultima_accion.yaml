@@ -1,0 +1,44 @@
+#Autor Pablo Ruiz Canovas
+swagger: '2.0'
+info:
+  title: "Diseño del objeto portatil"
+  version: 1.0.0 
+schemes:
+  - http
+produces:
+  - json
+paths:
+  /portatil:
+    get:
+      operationId: getPortatil
+      description: "Devuelve un objeto portatil"
+      responses:
+        200:
+          description: "La respuesta es un objeto portatil"
+          schema:
+            $ref: "#/definitions/UltimaAccion"
+        400:
+          description: "Error al delvolver el objeto portatil"
+
+definitions:
+  UltimaAccion:
+    type: object
+    properties: 
+      ultimoReinicio:
+        type: string
+        description: Ultimo reinicio realizado en tipo date almacenado en string
+      ultimaEjecucion:
+        type: string
+        description: Ultima ejecucion realizada en tipo date almacenado en string
+      ultimoBloqueo:
+        type: string
+        description: Ultimo bloqueo realizado en tipo date almacenado en string
+      ultimoEnlace:
+        type: string
+        description: Ultimo enlace abierto realizado en tipo date almacenado en string
+      ultimaInstalacion:
+        type: string
+        description: Ultima app instalada abierta realizado en tipo date almacenado en string
+      ultimaDesinstalacion:
+        type: string
+        description: Ultima app desinstalada abierta realizado en tipo date almacenado en string
