@@ -1,0 +1,111 @@
+#Autor Adrian Verdejo Garcia
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info:
+  title: Ultima monitorizacion file 8
+  description: Send WiFi connection to profesores, aulas, carritos
+  version: 1.0.0
+  contact:
+    name: Adrian Verdejo Garcia
+    email: avergar952@g.educaand.es
+paths:
+  /moderator/getEnvioReinicio/{numeroPortatil}:
+    get:
+      operationId: getEnvioReinicio
+      description: Recibe una respuesta de si se a reiniciado un determinado pc
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El envio de reinicio se a llevado a cabo
+        404:
+          description: Ordenador no encontrado
+        500:
+          description: Error de servidor
+definitions:
+  Portatil:
+    type: object
+    properties: 
+      numeroJuntaAndalucia:
+        type: integer
+        format: int32
+        description: "Numero de la junta de andalucia"
+      numeroPlacaBase:
+        type: integer
+        format: int32
+        description: "Numero de la placa base del portatil"
+      numeroPortatil:
+        type: integer
+        format: int32
+        description: "Pegatina que posee el portatil"
+      status:
+        type: boolean
+        description: true if the pc is on, false if the pc is off
+        default: true
+      reboot: 
+        type: boolean
+        default: false
+        description: set the pc of if this value is true
+      locked:
+        type: boolean
+        description: lock the pc if this value is true
+      appsInstalled:
+        type: array
+        description: An array of apps that the pc have installed
+        $ref: "#definitions/App"
+      Hardware:
+        $ref: '#definitions/Hardware'
+  Hardware:
+    type: object
+    properties: 
+        CPU:
+          $ref: '#/definitions/CPU'
+        RAM:
+          $ref: '#/definitions/RAM'
+        HardDisk:
+          $ref: '#/definitions/HardDisk'
+  CPU:
+    properties:
+      number:
+        type: integer
+        format: int32
+      brand:
+        type: string
+  RAM:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  HardDisk:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      currentSize: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  App:
+    type: object
+    properties: 
+      nameApp:
+        type: string
+      isMalware:
+        type: boolean
+        default: false
+      uninstall:
+        type: boolean
+        default: false
+      execute:
+        type: boolean
+        default: false
