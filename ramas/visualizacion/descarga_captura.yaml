@@ -1,0 +1,28 @@
+#Autor Eduardo Moreno
+#TODO Realizar un getter que devuelva un fichero simulando que es una captura de pantalla, no necesitas objetos
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - "https"
+info:
+  title: Filtro por pc, profesor y aula file 9
+  version: 1.0.0
+  contact:
+     name: "Eduardo Moreno"
+     email: "emoralg196@g.educaand.es"
+#TODO El path que tienes que usar es /visual/downloadScreenshot
+
+
+#Objeto para los errores 404 y 500
+definitions:
+  VisualException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
