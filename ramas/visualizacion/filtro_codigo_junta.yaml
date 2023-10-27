@@ -24,7 +24,7 @@ paths:
           type: integer
           format: int32
           required: true
-          description: Número de placa base del portátil
+          description: Número de placa base del portátil 
       responses:
         200:
           description: Respuesta exitosa
@@ -32,7 +32,7 @@ paths:
             $ref: "#/definitions/Portatil"
   /visual/aula/{numero_de_aula}:
     get:
-      summary: Obtener información de un aula por número de aula
+      summary: Obtener información de un aula por numero de aula
       parameters:
         - name: numero_de_aula
           in: path
