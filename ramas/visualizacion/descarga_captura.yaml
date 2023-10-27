@@ -1,28 +1,73 @@
 #Autor Eduardo Moreno
-#TODO Realizar un getter que devuelva un fichero simulando que es una captura de pantalla, no necesitas objetos
 swagger: '2.0'
 host: reaktor
 basePath: /reaktor
 schemes:
   - "https"
 info:
-  title: Descarga de capturas file 9
+  title: Filtro por pc, profesor y aula file 1
   version: 1.0.0
   contact:
      name: "Eduardo Moreno"
      email: "emoralg196@g.educaand.es"
-#TODO El path que tienes que usar es /visual/downloadScreenshot
 
+# TODO Los paths son /visual/PC/{numeroPlacaBase}, /visual/aula/{numero_de_aula} y /visual/profesor/{id}
 
-#Objeto para los errores 404 y
+# OBJETOS
 definitions:
-  VisualException:
-    type: object
-    properties: 
-      errorCode:
-        type: integer
-        format: int32
-      description:
-        type: string
-      errorSeverity:
-        type: string
+  # Definiciones de objetos aquí...
+
+# Rutas (endpoints)
+paths:
+  /visual/PC/{numeroPlacaBase}:
+    get:
+      summary: Obtener información de un portátil por número de placa base
+      parameters:
+        - name: numeroPlacaBase
+          in: path
+          type: integer
+          format: int32
+          required: true
+          description: Número de la placa base del portátil
+      responses:
+        200:
+          description: Éxito, se encontró el portátil
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: No se encontró el portátil
+
+  /visual/aula/{numero_de_aula}:
+    get:
+      summary: Obtener información de un aula por número de aula
+      parameters:
+        - name: numero_de_aula
+          in: path
+          type: integer
+          required: true
+          description: Número de aula
+      responses:
+        200:
+          description: Éxito, se encontró el aula
+          schema:
+            $ref: "#/definitions/Aula"
+        404:
+          description: No se encontró el aula
+
+  /visual/profesor/{id}:
+    get:
+      summary: Obtener información de un profesor por ID
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          format: int64
+          required: true
+          description: Identificador del profesor
+      responses:
+        200:
+          description: Éxito, se encontró el profesor
+          schema:
+            $ref: "#/definitions/Profesor"
+        404:
+          description: No se encontró el profesor
