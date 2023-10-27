@@ -1,0 +1,31 @@
+#Autor Pablo Ruiz Canovas
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info: 
+  version: 1.0.0
+  title: Peticion de envio de WiFi file 9
+  description: Turn off and reboot the pc
+  contact:
+    name: Pablo Ruiz Canovas
+    email: pruican1312@g.educaand.es
+paths:
+  /moderator/getSendWiFi/{numeroPortatil}:
+    get:
+      operationId: getSendWifi
+      description: Peticion que muestra si la configuracion WiFi ha sido un exito o se han producido erroes
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+          200:  
+            description: La conexion WiFi ha sido un exito
+          404:
+            description: Error al seleccionar portatil para conectarse
+          500:
+            description: Internal server error
