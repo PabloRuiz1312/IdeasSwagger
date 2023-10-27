@@ -13,7 +13,53 @@ info:
      email: "emoralg196@g.educaand.es"
 #TODO Los paths son /visual/PC/{numeroJuntaAndalucia}
 
-#OBJETOS
+
+paths:
+  /visual/PC/{numeroPlacaBase}:
+    get:
+      summary: Obtener información de un portátil por número de placa base
+      parameters:
+        - name: numeroPlacaBase
+          in: path
+          type: integer
+          format: int32
+          required: true
+          description: Número de placa base del portátil
+      responses:
+        200:
+          description: Respuesta exitosa
+          schema:
+            $ref: "#/definitions/Portatil"
+  /visual/aula/{numero_de_aula}:
+    get:
+      summary: Obtener información de un aula por número de aula
+      parameters:
+        - name: numero_de_aula
+          in: path
+          type: integer
+          required: true
+          description: Número de aula
+      responses:
+        200:
+          description: Respuesta exitosa
+          schema:
+            $ref: "#/definitions/Aula"
+  /visual/profesor/{id}:
+    get:
+      summary: Obtener información de un profesor por ID
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          format: int64
+          required: true
+          description: ID del profesor
+      responses:
+        200:
+          description: Respuesta exitosa
+          schema:
+            $ref: "#/definitions/Profesor"
+
 definitions:
   Portatil:
       type: object
@@ -41,12 +87,9 @@ definitions:
         locked:
           type: boolean
           description: lock the pc if this value is true
-        appsInstalled:
-          type: array
-          description: An array of apps that the pc have installed
-          $ref: "#definitions/App"
+        
         Hardware:
-          $ref: '#definitions/Hardware'
+          $ref: "#/definitions/Hardware"
   Hardware:
     type: object
     properties: 
@@ -94,3 +137,20 @@ definitions:
       execute:
         type: boolean
         default: false
+  Profesor:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      nombre:
+        type: string
+  Aula:
+    type: object
+    properties:
+      numero_de_aula:
+        type: integer
+        description: Número de aula
+      id_profesor:
+        type: integer
+        description: Identificador del profesor asignado
