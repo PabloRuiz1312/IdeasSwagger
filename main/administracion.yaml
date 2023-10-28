@@ -1,0 +1,490 @@
+#Autores Pablo Ruiz, Adrian Verdejo, Eduardo Moreno
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info: 
+  version: 1.0.0
+  title: Reaktor Swagger Documentation
+  description: Reaktor rss 
+  contact:
+    name: Pablo Ruiz Canovas, Eduardo Moreno, Adrian Verdejo
+    
+paths: 
+  /admin/turnOf/{status}:
+    get:
+      operationId: turnOffPc
+      description: Turn off the pc using the status param
+      parameters:
+        - name: status 
+          type: boolean
+          description: True if teh pc is on or false if the pc is off
+          in: path
+          required: true
+      responses:
+        200:
+          description: PC turn off successfully
+          schema: 
+            $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying set off the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
+
+      produces:
+        - application/json
+  
+  /admin/reboot/{reboot}:
+    get:
+      operationId: rebootPc
+      description: Reboot the pc using the reboot param
+      parameters:
+        - name: reboot 
+          type: boolean
+          description: True if the pc will be rebooted or false if not
+          in: path
+          required: true
+      responses:
+        200:
+          description: PC turn off successfully
+          schema: 
+            $ref: "#definitions/Portatil"
+        404:
+          description: "Error trying reboot the pc"
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/AdminException"
+      produces:
+        - application/json
+
+  /admin/executeApp/{numeroPortatil}/{appName}:
+    get:
+      operationId: executeApp
+      description: Execute a app of a specific pc using his number
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          description: Sticker number of the pc
+          in: path
+          required:  true
+        - name: appName
+          type: string
+          description: Name of the app to execute
+          in: path
+          required:  true
+      responses:
+        200:
+          description: App executed successfully
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: Fail to execute, PC number or app name are wrong
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/portatiles/{lock}:
+    put:
+      summary: Actualizar un portátil por su identificador de bloqueo
+      parameters:
+        - name: lock
+          in: path
+          description: Identificador de bloqueo del portátil
+          required: true
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Operación exitosa
+          schema:
+            $ref: "#/definitions/Portatil"
+        404:
+          description: Portátil no encontrado
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Error interno del servidor
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/uploadScreenshot:
+    post:
+      summary: Cargar captura de pantalla
+      description: Enviar una captura de pantalla simulada.
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: screenshot
+          in: formData
+          description: Archivo de captura de pantalla
+          required: true
+          type: file
+      responses:
+        200:
+          description: Archivo cargado con éxito
+        400:
+          description: Solicitud incorrecta
+        500:
+          description: Error del servidor
+  /admin/downloadScreenshot:
+    get:
+      operationId: downloadScreenshot
+      description: Descarga de una captura de pantalla
+      responses:
+        200:
+          description: Captura descargada con exito
+          schema:
+            type: file
+        500:
+          description: Error de servidor
+          schema:
+            $ref: "#/definitions/AdminException"
+      produces:
+        - multipart/form-data
+  /admin/openLink/{URL}:
+    get:
+      operationId: openLink
+      description: Open a link in a aula or carrito
+      parameters:
+        - name: URL
+          type: string
+          in: path
+          required: true
+        - name: numero_de_aula
+          in: body
+          schema:
+            $ref: "#/definitions/Aula"
+        - name: identifier
+          in: body
+          schema:
+            $ref: "#/definitions/Carrito"
+      responses:
+        200:
+          description: Link opened successfully
+        404:
+          description: Error introducing params
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/installApp/{numeroPortatil}:
+    post:
+      operationId: Instalar app
+      description: Instalar una app a un ordenador en especifico
+      consumes:
+        - application/json
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+        - name: nombreApp
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/App'
+      responses:
+        200:
+          description: Borrado con exito
+        404:
+          description: No se a podido eliminar la app
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: error de servidor
+          schema:
+            $ref: '#/definitions/AdminException'
+  /admin/uninstallApp/{numeroPortatil}:
+    delete:
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+        - name: nombreApp
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/App'
+      responses:
+        200:
+          description: Borrado con exito
+        404:
+          description: No se a podido eliminar la app
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: error de servidor
+          schema:
+            $ref: '#/definitions/AdminException'
+  /admin/sendWifi/{numero_de_aula}:
+    post:
+      operationId: sendWifiAula
+      description: Send a wifi to a aula
+      consumes:
+        - application/json
+      parameters:
+        - name: numero_de_aula
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/sendWifi/{identifier}:
+    post:
+      operationId: sendWifiCarrito
+      description: Send a wifi to a carrito
+      consumes:
+        - application/json
+      parameters:
+        - name: identifier
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+
+  /admin/sendWifi/{id}:
+    post:
+      operationId: sendWifiProfesor
+      description: Send a wifi to a profesor
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          type: integer
+          format: int32
+          in: path
+          required: true 
+      responses:
+        200:
+          description: WiFi send successfully
+        404:
+          description: Error sending WiFi
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/updatePC/{numeroJuntaAndalucia}:
+    put:
+      operationId: actualizarPortatil
+      description: actualizar portatil a traves de su numero de junta de andalucia
+      parameters:
+        - name: numeroJuntaAndalucia
+          in: body
+          description: Instancia de numero de la junta de andalucia
+          required: true
+          schema:
+            $ref: "#/definitions/Portatil"
+      responses:
+        200:
+          description: Ordenador actualizado con exito
+        404:
+          description: No se a podido actualizar debido a un error
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: Error del servidor
+          schema:
+            $ref: '#/definitions/AdminException'
+  /admin/updatePC/{numeroPlacaBase}:
+    put:
+      operationId: actualizarPortatil
+      description: actualizar portatil a traves de su numero de placa base
+      parameters:
+        - name: numeroPlacaBase
+          in: body
+          description: Instancia de numero de la placa base
+          required: true
+          schema:
+            $ref: "#/definitions/Portatil"
+      responses:
+        200:
+          description: Ordenador actualizado con exito
+        404:
+          description: No se a podido actualizar debido a un error
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: Error del servidor
+          schema:
+            $ref: '#/definitions/AdminException'
+  /admin/updatePC/{numeroPortatil}:
+    put:
+      operationId: actualizarPortatil
+      description: actualizar portatil a traves de su numero de portatil
+      parameters:
+        - name: numeroPortatil
+          in: body
+          description: Instancia de numero de la placa base
+          required: true
+          schema:
+            $ref: "#/definitions/Portatil"
+      responses:
+        200:
+          description: Ordenador actualizado con exito
+        404:
+          description: No se a podido actualizar debido a un error
+          schema:
+            $ref: '#/definitions/AdminException'
+        500:
+          description: Error del servidor
+          schema:
+            $ref: '#/definitions/AdminException'
+
+definitions:
+  Portatil:
+    type: object
+    properties: 
+      numeroJuntaAndalucia:
+        type: integer
+        format: int32
+        description: "Numero de la junta de andalucia"
+      numeroPlacaBase:
+        type: integer
+        format: int32
+        description: "Numero de la placa base del portatil"
+      numeroPortatil:
+        type: integer
+        format: int32
+        description: "Pegatina que posee el portatil"
+      status:
+        type: boolean
+        description: true if the pc is on, false if the pc is off
+        default: true
+      reboot: 
+        type: boolean
+        default: false
+        description: set the pc of if this value is true
+      locked:
+        type: boolean
+        description: lock the pc if this value is true
+      appsInstalled:
+        type: array
+        description: An array of apps that the pc have installed
+        $ref: "#definitions/App"
+      links:
+        type: array
+        description: An array of links that the pc have
+        items: 
+          type: string
+      Hardware:
+        $ref: '#definitions/Hardware'
+  Hardware:
+    type: object
+    properties: 
+        CPU:
+          $ref: '#/definitions/CPU'
+        RAM:
+          $ref: '#/definitions/RAM'
+        HardDisk:
+          $ref: '#/definitions/HardDisk'
+  CPU:
+    properties:
+      number:
+        type: integer
+        format: int32
+      brand:
+        type: string
+  RAM:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  HardDisk:
+    properties: 
+      size: 
+        type: integer
+        format: int32
+      currentSize: 
+        type: integer
+        format: int32
+      brand: 
+        type: string
+  App:
+    type: object
+    properties: 
+      nameApp:
+        type: string
+      isMalware:
+        type: boolean
+        default: false
+      uninstall:
+        type: boolean
+        default: false
+      execute:
+        type: boolean
+        default: false
+  Aula:
+    type: object
+    properties:
+      numero_de_aula:
+        type: integer
+        description: Número de aula
+      id_profesor:
+        type: integer
+        description: Identificador del profesor asignado
+  Carrito:
+    type: object
+    properties: 
+      identifier:
+        type: integer
+        description: Identificador del carrito
+      ordenadores:
+        type: array
+        description: Array de ordenadores
+  AdminException:
+    type: object
+    properties: 
+      errorCode:
+        type: integer
+        format: int32
+      description:
+        type: string
+      errorSeverity:
+        type: string
+      
+
+
+
