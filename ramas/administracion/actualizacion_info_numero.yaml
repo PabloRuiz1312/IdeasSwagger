@@ -13,7 +13,7 @@ info:
      email: "avergar952@g.educaand.es"
 #TODO El path que tienes que usar es /admin/updatePC/{numeroPortatil}
 paths:
-  /admin/updatePC/{numeroPlacaBase}:
+  /admin/updatePC/{numeroPortatil}:
     put:
       operationId: actualizarPortatil
       description: actualizar portatil a traves de su numero de portatil

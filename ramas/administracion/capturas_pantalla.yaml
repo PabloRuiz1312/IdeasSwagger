@@ -33,3 +33,18 @@ paths:
           description: Solicitud incorrecta
         500:
           description: Error del servidor
+  /admin/downloadScreenshot:
+    get:
+      operationId: downloadScreenshot
+      description: Descarga de una captura de pantalla
+      responses:
+        200:
+          description: Captura descargada con exito
+          schema:
+            type: file
+        500:
+          description: Error de servidor
+          schema:
+            $ref: "#/definitions/AdminException"
+      produces:
+        - multipart/form-data
