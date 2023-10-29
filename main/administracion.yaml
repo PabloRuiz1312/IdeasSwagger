@@ -27,7 +27,7 @@ paths:
         200:
           description: PC turn off successfully
           schema: 
-            $ref: "#definitions/Portatil"
+            $ref: '#/definitions/Portatil'
         404:
           description: "Error trying set off the pc"
           schema:
@@ -54,7 +54,7 @@ paths:
         200:
           description: PC turn off successfully
           schema: 
-            $ref: "#definitions/Portatil"
+            $ref: "#/definitions/Portatil"
         404:
           description: "Error trying reboot the pc"
           schema:
@@ -155,9 +155,9 @@ paths:
             $ref: "#/definitions/AdminException"
       produces:
         - multipart/form-data
-  /admin/openLink/{URL}:
+  /admin/openLinkAula/{URL}:
     get:
-      operationId: openLink
+      operationId: openLinkAula
       description: Open a link in a aula or carrito
       parameters:
         - name: URL
@@ -168,7 +168,27 @@ paths:
           in: body
           schema:
             $ref: "#/definitions/Aula"
-        - name: identifier
+      responses:
+        200:
+          description: Link opened successfully
+        404:
+          description: Error introducing params
+          schema:
+            $ref: "#/definitions/AdminException"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/AdminException"
+  /admin/openLinkCarrito/{URL}:
+    get:
+      operationId: openLinkCarrito
+      description: Open a link in a aula or carrito
+      parameters:
+        - name: URL
+          type: string
+          in: path
+          required: true
+        - name: id
           in: body
           schema:
             $ref: "#/definitions/Carrito"
@@ -258,18 +278,18 @@ paths:
           description: Internal server error
           schema:
             $ref: "#/definitions/AdminException"
-  /admin/sendWifi/{identifier}:
+  /admin/sendWifiCarrito:
     post:
       operationId: sendWifiCarrito
       description: Send a wifi to a carrito
       consumes:
         - application/json
       parameters:
-        - name: identifier
+        - name: SSID
           type: integer
           format: int32
-          in: path
-          required: true 
+          in: query
+          required: true
       responses:
         200:
           description: WiFi send successfully
@@ -282,17 +302,17 @@ paths:
           schema:
             $ref: "#/definitions/AdminException"
 
-  /admin/sendWifi/{id}:
+  /admin/sendWifiProfesor:
     post:
       operationId: sendWifiProfesor
       description: Send a wifi to a profesor
       consumes:
         - application/json
       parameters:
-        - name: id
+        - name: SSID
           type: integer
           format: int32
-          in: path
+          in: query
           required: true 
       responses:
         200:
@@ -305,17 +325,17 @@ paths:
           description: Internal server error
           schema:
             $ref: "#/definitions/AdminException"
-  /admin/updatePC/{numeroJuntaAndalucia}:
+  /admin/updatePC/NumJunta:
     put:
-      operationId: actualizarPortatil
+      operationId: actualizarPortatilNumeroJunta
       description: actualizar portatil a traves de su numero de junta de andalucia
       parameters:
         - name: numeroJuntaAndalucia
-          in: body
+          in: query
           description: Instancia de numero de la junta de andalucia
           required: true
-          schema:
-            $ref: "#/definitions/Portatil"
+          type: integer
+          format: int64
       responses:
         200:
           description: Ordenador actualizado con exito
@@ -327,17 +347,17 @@ paths:
           description: Error del servidor
           schema:
             $ref: '#/definitions/AdminException'
-  /admin/updatePC/{numeroPlacaBase}:
+  /admin/updatePC/NumSerie:
     put:
-      operationId: actualizarPortatil
+      operationId: actualizarPortatilNumeroSerie
       description: actualizar portatil a traves de su numero de placa base
       parameters:
         - name: numeroPlacaBase
-          in: body
+          in: query
           description: Instancia de numero de la placa base
           required: true
-          schema:
-            $ref: "#/definitions/Portatil"
+          type: integer
+          format: int64
       responses:
         200:
           description: Ordenador actualizado con exito
@@ -349,17 +369,17 @@ paths:
           description: Error del servidor
           schema:
             $ref: '#/definitions/AdminException'
-  /admin/updatePC/{numeroPortatil}:
+  /admin/updatePC/NumeroPegatina:
     put:
       operationId: actualizarPortatil
       description: actualizar portatil a traves de su numero de portatil
       parameters:
         - name: numeroPortatil
-          in: body
+          in: query
           description: Instancia de numero de la placa base
           required: true
-          schema:
-            $ref: "#/definitions/Portatil"
+          type: integer
+          format: int32
       responses:
         200:
           description: Ordenador actualizado con exito
@@ -402,14 +422,15 @@ definitions:
       appsInstalled:
         type: array
         description: An array of apps that the pc have installed
-        $ref: "#definitions/App"
+        items:
+          $ref: "#/definitions/App"
       links:
         type: array
         description: An array of links that the pc have
         items: 
           type: string
       Hardware:
-        $ref: '#definitions/Hardware'
+        $ref: '#/definitions/Hardware'
   Hardware:
     type: object
     properties: 
@@ -475,6 +496,8 @@ definitions:
       ordenadores:
         type: array
         description: Array de ordenadores
+        items:
+          $ref: "#/definitions/Portatil"
   AdminException:
     type: object
     properties: 

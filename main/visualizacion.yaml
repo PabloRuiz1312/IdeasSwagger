@@ -36,7 +36,7 @@ paths:
           description: Error interno de servidor
           schema:
             $ref: "#/definitions/VisualException"
-  /visual/PC/{numero_de_aula}:
+  /visual/PC/aula/{numero_de_aula}:
     get:
       operationId: getPCByAula
       description: Se obtiene un ordenador o varios a traves de un aula
@@ -62,7 +62,7 @@ paths:
           description: Error interno de servidor
           schema:
             $ref: "#/definitions/VisualException"
-  /visual/PC/{nombre}:
+  /visual/PC/profesor/{nombre}:
     get:
       operationId: getPCByProfesor
       description: Se obtiene un ordenador o varios a traves de un aula
@@ -145,7 +145,7 @@ paths:
           description: Error al introducir el nombre del profesor
           schema:
             $ref: "#/definitions/VisualException"
-  /visual/getPortatil/{numeroPlacaBase}:
+  /visual/getPortatil/numSerie/{numeroPlacaBase}:
     get:
       operationId: numeroPlacaBase
       description: obtener el portatil por su placa base
@@ -190,7 +190,7 @@ paths:
           description: Error de servidor
           schema:
             $ref: '#/definitions/VisualException'
-  /visual/getPortatil/{number}:
+  /visual/getPortatil/pegatina/{number}:
     get:
       operationId: getPortatilByCPU
       description: obtener el portatil por su CPU
@@ -214,7 +214,7 @@ paths:
           description: Error de servidor
           schema:
             $ref: '#/definitions/VisualException'
-  /visual/getPc{size}:
+  /visual/getPc/sizeRAM/{size}:
     get:
       operationId: getPcBySizeRAM
       description: Obtains a pc using the RAM size
@@ -240,7 +240,7 @@ paths:
           description: Internal server error
           schema:
             $ref: "#/definitions/VisualException"
-  /visual/getPc{sizeHDD}:
+  /visual/getPc/sizeHDD/{sizeHDD}:
     get:
       operationId: getPcBySizeHDD
       description: Obtains a pc using the RAM size
@@ -291,7 +291,7 @@ paths:
             $ref: "#/definitions/VisualException"
   /visual/getLastExe/{numeroPortatil}:
     get:
-      operationId: getLastReboot
+      operationId: getLastExecutable
       description: Se obtiene el ultimo programa ejecutado de un portatil usando su pegatina
       parameters:
         - name: numeroPortatil
@@ -314,7 +314,7 @@ paths:
             $ref: "#/definitions/VisualException"
   /visual/getLastLink/{numeroPortatil}:
     get:
-      operationId: getLastReboot
+      operationId: getLastLink
       description: Se obtiene el ultimo enlace de un portatil usando su pegatina
       parameters:
         - name: numeroPortatil
@@ -337,7 +337,7 @@ paths:
             $ref: "#/definitions/VisualException"
   /visual/getLastInstall/{numeroPortatil}:
     get:
-      operationId: getLastReboot
+      operationId: getLastInstall
       description: Se obtiene la ultima instalacion de un portatil usando su pegatina
       parameters:
         - name: numeroPortatil
@@ -360,7 +360,7 @@ paths:
             $ref: "#/definitions/VisualException"
   /visual/getLastUninstall/{numeroPortatil}:
     get:
-      operationId: getLastReboot
+      operationId: getLastUninstall
       description: Se obtiene la ultima desinstalacion de un portatil usando su pegatina
       parameters:
         - name: numeroPortatil
@@ -381,7 +381,7 @@ paths:
           description: Error interno de servidor
           schema:
             $ref: "#/definitions/VisualException"
-  /visual/downloadScreenshot/{numeroPortatil}:
+  /visual/downloadScreenshot/portatil/{numeroPortatil}:
     get:
       operationId: getScreenshotPc
       description: Se obtiene una captura mediante la pegatina de un portatil
@@ -406,7 +406,7 @@ paths:
             $ref: "#/definitions/VisualException"
       produces:
         - multipart/form-data
-  /visual/downloadScreenshot/{numero_de_aula}:
+  /visual/downloadScreenshot/aula/{numero_de_aula}:
     get:
       operationId: getScreenshotAula
       description: Se obtiene una captura mediante un aula
@@ -431,7 +431,7 @@ paths:
             $ref: "#/definitions/VisualException"
       produces:
         - multipart/form-data
-  /visual/downloadScreenshot/{nombre}:
+  /visual/downloadScreenshot/profesor/{nombre}:
     get:
       operationId: getScreenshotProfesor
       description: Se obtiene una captura mediante un profesor
@@ -486,9 +486,11 @@ definitions:
       appsInstalled:
         type: array
         description: An array of apps that the pc have installed
-        $ref: "#definitions/App"
+        items:
+          $ref: "#/definitions/App"
       Hardware:
-        $ref: '#definitions/Hardware'
+        type: object
+        $ref: '#/definitions/Hardware'
   Hardware:
     type: object
     properties: 

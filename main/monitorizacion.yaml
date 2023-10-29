@@ -118,7 +118,7 @@ paths:
           description: Error de servidor
   /moderator/getUninstallationRequest/{numeroPortatil}:
     get:
-      operationId: getInstallationRequest
+      operationId: getUninstallationRequest
       description: Manda una peticion para abrir un enlace donde el servidor trabajara con el ordenador indicado
       parameters:
         - name: numeroPortatil
@@ -170,9 +170,9 @@ paths:
           description: Error al identificar el ordenador
         500:
           description: Error interno de servidor
-  /moderator/sendPcBBDD/{numeroPlacaBase}:
+  /moderator/sendPcBBDDNumSerie:
     post:
-      operationId: sendPcToBBDD
+      operationId: sendPcToBBDDNumSerie
       description: Manda un ordenador a la BBDD usando el numero sobre el portatil
       consumes:
         - application/json
@@ -181,7 +181,7 @@ paths:
           description: Numero de la placa base para identificar un portatil
           type: integer
           format: int32
-          in: path
+          in: query
           required: true
       responses:
         200:
@@ -190,9 +190,9 @@ paths:
           description: Error al identificar el ordenador
         500:
           description: Error interno de servidor
-  /moderator/sendPcBBDD/{numeroPortatil}:
+  /moderator/sendPcBBDDPegatina:
     post:
-      operationId: sendPcToBBDD
+      operationId: sendPcToBBDDPegatina
       description: Manda un ordenador a la BBDD usando el numero sobre el portatil
       consumes:
         - application/json
@@ -201,7 +201,7 @@ paths:
           description: Pegatina sobre el portatil para identificarlo
           type: integer
           format: int32
-          in: path
+          in: query
           required: true
       responses:
         200:
