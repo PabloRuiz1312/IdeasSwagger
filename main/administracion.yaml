@@ -10,7 +10,8 @@ info:
   description: Reaktor rss 
   contact:
     name: Pablo Ruiz Canovas, Eduardo Moreno, Adrian Verdejo
-    
+produces:
+  - application/json
 paths: 
   /admin/turnOf/{status}:
     get:
