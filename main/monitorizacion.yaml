@@ -1,0 +1,214 @@
+#Autores Pablo Ruiz, Adrian Verdejo, Eduardo Moreno
+swagger: '2.0'
+host: reaktor
+basePath: /reaktor
+schemes:
+  - https
+info: 
+  version: 1.0.0
+  title: Reaktor Swagger Documentation
+  description: Reaktor rss 
+  contact:
+    name: Pablo Ruiz Canovas, Eduardo Moreno, Adrian Verdejo
+paths:
+  /moderator/sendScreenshot:
+    post:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: screenshot
+          in: formData
+          description: Archivo de captura de pantalla
+          required: true
+          type: file
+      responses:
+        200:
+          description: "Captura enviada"
+        404:
+          description: El fichero enviado no es una imagen
+        500:
+          description: Error de servidor
+  /moderator/getEnvioReinicio/{numeroPortatil}:
+    get:
+      operationId: getEnvioReinicio
+      description: Recibe una respuesta de si se a reiniciado un determinado pc
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El envio de reinicio se a llevado a cabo
+        404:
+          description: Ordenador no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getEnvioEjecucion/{numeroPortatil}:
+    get:
+      operationId: getEnvioEjecucion
+      description: Recibe una respuesta de si se a ejecutado o no una aplicacion de un determinado pc
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+        - name: nameApp
+          type: string
+          in: query
+      responses:
+        200:
+          description: El envio de ejecucion se a llevado a cabo
+        404:
+          description: Ordenador no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getEnvioBloqueo/{numeroPortatil}:
+    get:
+      operationId: getEnvioBloqueo
+      description: Recibe una respuesta de si se a bloqueado un determinado pc
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El envio de bloqueo se a llevado a cabo
+        404:
+          description: Ordenador no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getLinkRequest/{numeroPortatil}:
+    get:
+      operationId: getLinkRequest
+      description: Manda una peticion para abrir un enlace donde el servidor trabajara con el ordenador indicado
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Link abierto
+        404:
+          description: Ordenador apagado o no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getInstallationRequest/{numeroPortatil}:
+    get:
+      operationId: getInstallationRequest
+      description: Manda una peticion para abrir un enlace donde el servidor trabajara con el ordenador indicado
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Instalacion completada
+        404:
+          description: Ordenador apagado o no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getUninstallationRequest/{numeroPortatil}:
+    get:
+      operationId: getInstallationRequest
+      description: Manda una peticion para abrir un enlace donde el servidor trabajara con el ordenador indicado
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: Desinstalacion completada
+        404:
+          description: Ordenador apagado o no encontrado
+        500:
+          description: Error de servidor
+  /moderator/getSendWiFi/{numeroPortatil}:
+    get:
+      operationId: getSendWifi
+      description: Peticion que muestra si la configuracion WiFi ha sido un exito o se han producido erroes
+      parameters:
+        - name: numeroPortatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+          200:  
+            description: La conexion WiFi ha sido un exito
+          404:
+            description: Error al seleccionar portatil para conectarse
+          500:
+            description: Internal server error
+  /moderator/sendPcBBDD/{numeroJuntaAndalucia}:
+    post:
+      operationId: sendPcToBBDD
+      description: Manda un ordenador a la BBDD usando el numero de la junta
+      consumes:
+        - application/json
+      parameters:
+        - name: numeroJuntaAndalucia
+          description: Numero de la junta de andalucia apara identificar un portatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El ordenador se ha mandado a la base de datos
+        404:
+          description: Error al identificar el ordenador
+        500:
+          description: Error interno de servidor
+  /moderator/sendPcBBDD/{numeroPlacaBase}:
+    post:
+      operationId: sendPcToBBDD
+      description: Manda un ordenador a la BBDD usando el numero sobre el portatil
+      consumes:
+        - application/json
+      parameters:
+        - name: numeroPlacaBase
+          description: Numero de la placa base para identificar un portatil
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El ordenador se ha mandado a la base de datos
+        404:
+          description: Error al identificar el ordenador
+        500:
+          description: Error interno de servidor
+  /moderator/sendPcBBDD/{numeroPortatil}:
+    post:
+      operationId: sendPcToBBDD
+      description: Manda un ordenador a la BBDD usando el numero sobre el portatil
+      consumes:
+        - application/json
+      parameters:
+        - name: numeroPortatil
+          description: Pegatina sobre el portatil para identificarlo
+          type: integer
+          format: int32
+          in: path
+          required: true
+      responses:
+        200:
+          description: El ordenador se ha mandado a la base de datos
+        404:
+          description: Error al identificar el ordenador
+        500:
+          description: Error interno de servidor
+  
+  
